@@ -8,7 +8,7 @@
 #define _RENDERER_RENDERER_H_
 
 #ifdef __cplusplus
-extern "c" {
+extern "C" {
 #endif
 
 void test(void);
