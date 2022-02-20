@@ -1,9 +1,9 @@
 project(
-	'angel',
+	'renderer',
 	'c',
 	version: '0.0.1',
 	license: 'Apache-2.0',
-	meson_version: '>=0.58.1',
+	meson_version: '>=0.60.1',
 	default_options: [
 		'c_std=c11',
 		'warning_level=2',
@@ -38,23 +38,24 @@ renderer_files = []
 
 subdir('renderer')
 subdir('include')
+subdir('glad')
 
-renderer_deps = [
+lib_renderer_deps = [
 	math,
 ]
 
-renderer_inc = include_directories('include')
+lib_renderer_inc = include_directories('include')
 
-librenderer = library(
+lib_renderer = library(
 	meson.project_name(), renderer_files,
 	soversion: soversion,
-	dependencies: renderer_deps,
-	include_directories: [renderer_inc],
+	dependencies: lib_renderer_deps,
+	include_directories: [lib_renderer_inc],
 	install: true,
 )
 
 pkgconfig = import('pkgconfig')
-pkgconfig.generate(librenderer,
+pkgconfig.generate(lib_renderer,
 	version: meson.project_version(),
 	filebase: meson.project_name(),
 	name: meson.project_name(),
